@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="/static/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+  <title>apiRES github & Django</title>
+  <style>
+    body{
+      background: #f5f6fa;
+    }
+    .form-signin{
+      max-width: 550px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    .btn-primary{
+      background-color: #2ed573;
+      background-position: center;
+      color:black;
+    }
+    .btn-primary:hover{
+      background-color:#32ff7e;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="text-center"> Github User Data </h1>
+
+  <div class="col-lg-12">
+    <!--Container Form-->
+    <div class="container text-center">
+      <form class="form-signin" id="login_form" method="post" action="/app/profile/">
+        {% csrf_token %}
+
+        <br>
+        <input type="text" name="user" class="form-control" placeholder="Github User Name, e.g: DrkSephy" value="" required autofocus>
+        <br>
+
+        <button class="btn btn-lg btn-success text-center" type="submit">Get Data</button>
+
+      </form>
+    </div>
+
+    <!--End Form-->
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped table-dark">
+        <thead>
+          <tr>
+            <th class="header"> Username <i class="icon-sort"></i></th>
+            <th class="header"> Blog <i class="icon-sort"></i></th>
+            <th class="header"> Public Repos <i class="icon-sort"></i></th>
+            <th class="header"> Created <i class="icon-sort"></i></th>
+            <th class="header"> ID <i class="icon-sort"></i></th>
+            <th class="header"> Followers <i class="icon-sort"></i></th>
+            <th class="header"> Following <i class="icon-sort"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for key in data %}
+          <tr>
+            <td>{{ key.name }}</td>
+            <td>{{ key.blog }}</td>
+            <td>{{ key.public_repos }}</td>
+            <td>{{ key.created_at }}</td>
+            <td>{{ key.id }}</td>
+            <td>{{ key.followers }}</td>
+            <td>{{ key.following }}</td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+</html>
